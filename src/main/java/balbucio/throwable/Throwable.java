@@ -49,7 +49,7 @@ public class Throwable {
      * It will print if an error occurs.
      * @param run
      */
-    public static void print(ThrowableRunnable run){
+    public static void printThrow(ThrowableRunnable run){
         try{
             run.run();
         } catch (Exception e){
@@ -62,7 +62,7 @@ public class Throwable {
      * @param run
      * @param logger
      */
-    public static void print(ThrowableRunnable run, Logger logger){
+    public static void throwInLogger(ThrowableRunnable run, Logger logger){
         try{
             run.run();
         } catch (Exception e){
@@ -75,7 +75,7 @@ public class Throwable {
      * @param run
      * @param clazz
      */
-    public static void instanceOf(ThrowableRunnable run, Class<Exception> clazz){
+    public static void throwIfInstanceOf(ThrowableRunnable run, Class<Exception> clazz){
         try{
             run.run();
         } catch (Exception e){
@@ -137,7 +137,7 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static Optional<Object> silentlyReturn(ThrowableReturn run){
+    public static Optional<Object> returnOptionalOrSilently(ThrowableReturn run){
         Optional<Object> opti = null;
         try{
             opti = run.run();
@@ -157,12 +157,34 @@ public class Throwable {
      * @param onError
      * @return
      */
-    public static Optional<Object> silentlyReturnAnd(ThrowableReturn run, Runnable onError){
+    public static Optional<Object> returnOptionalOrSilently(ThrowableReturn run, Runnable onError){
         Optional<Object> opti = null;
         try{
             opti = run.run();
         } catch (Exception ignored){
             onError.run();
+        }
+
+        if(opti == null){
+            opti = Optional.empty();
+        }
+
+        return opti;
+    }
+
+    /**
+     * Executes code that can return an Object, in case of error it will return an empty Optional.
+     * And if there is an error is printed.
+     * @param run
+     * @param onError
+     * @return
+     */
+    public static Optional<Object> returnOptionalOrThrow(ThrowableReturn run){
+        Optional<Object> opti = null;
+        try{
+            opti = run.run();
+        } catch (Exception ignored){
+            ignored.printStackTrace();
         }
 
         if(opti == null){
