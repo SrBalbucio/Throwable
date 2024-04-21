@@ -137,15 +137,12 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static Optional<?> returnOptionalOrSilently(ThrowableReturn run){
-        Optional<?> opti = null;
-        try{
-            opti = run.run();
-        } catch (Exception ignored){}
+    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run){
+        Optional<T> opti = null;
 
-        if(opti == null){
-            opti = Optional.empty();
-        }
+        try{
+            opti = Optional.of(run.get());
+        } catch (Exception ignored){}
 
         return opti;
     }
@@ -157,16 +154,13 @@ public class Throwable {
      * @param onError
      * @return
      */
-    public static Optional<?> returnOptionalOrSilently(ThrowableReturn run, Runnable onError){
-        Optional<?> opti = null;
+    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run, Runnable onError){
+        Optional<T> opti = null;
+
         try{
-            opti = run.run();
+            opti = Optional.of(run.get());
         } catch (Exception ignored){
             onError.run();
-        }
-
-        if(opti == null){
-            opti = Optional.empty();
         }
 
         return opti;
@@ -178,16 +172,13 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static Optional<?> returnOptionalOrThrow(ThrowableReturn run){
-        Optional<?> opti = null;
+    public static <T> Optional<T> returnOptionalOrThrow(ThrowableReturn<T> run){
+        Optional<T> opti = null;
+
         try{
-            opti = run.run();
+            opti = Optional.of(run.get());
         } catch (Exception ignored){
             ignored.printStackTrace();
-        }
-
-        if(opti == null){
-            opti = Optional.empty();
         }
 
         return opti;

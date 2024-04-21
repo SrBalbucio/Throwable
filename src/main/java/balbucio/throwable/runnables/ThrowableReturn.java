@@ -2,7 +2,7 @@ package balbucio.throwable.runnables;
 
 import java.util.Optional;
 
-public interface ThrowableReturn {
+public interface ThrowableReturn<T> {
 
-    public Optional<Object> run() throws Exception;
+    public T get() throws Exception;
 }
