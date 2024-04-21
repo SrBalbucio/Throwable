@@ -137,8 +137,8 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static Optional<Object> returnOptionalOrSilently(ThrowableReturn run){
-        Optional<Object> opti = null;
+    public static Optional<?> returnOptionalOrSilently(ThrowableReturn run){
+        Optional<?> opti = null;
         try{
             opti = run.run();
         } catch (Exception ignored){}
@@ -157,8 +157,8 @@ public class Throwable {
      * @param onError
      * @return
      */
-    public static Optional<Object> returnOptionalOrSilently(ThrowableReturn run, Runnable onError){
-        Optional<Object> opti = null;
+    public static Optional<?> returnOptionalOrSilently(ThrowableReturn run, Runnable onError){
+        Optional<?> opti = null;
         try{
             opti = run.run();
         } catch (Exception ignored){
@@ -176,11 +176,10 @@ public class Throwable {
      * Executes code that can return an Object, in case of error it will return an empty Optional.
      * And if there is an error is printed.
      * @param run
-     * @param onError
      * @return
      */
-    public static Optional<Object> returnOptionalOrThrow(ThrowableReturn run){
-        Optional<Object> opti = null;
+    public static Optional<?> returnOptionalOrThrow(ThrowableReturn run){
+        Optional<?> opti = null;
         try{
             opti = run.run();
         } catch (Exception ignored){
