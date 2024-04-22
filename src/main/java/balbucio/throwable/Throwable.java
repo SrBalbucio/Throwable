@@ -138,7 +138,7 @@ public class Throwable {
      * @return
      */
     public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run){
-        Optional<T> opti = null;
+        Optional<T> opti = Optional.empty();
 
         try{
             opti = Optional.of(run.get());
@@ -155,7 +155,7 @@ public class Throwable {
      * @return
      */
     public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run, Runnable onError){
-        Optional<T> opti = null;
+        Optional<T> opti = Optional.empty();
 
         try{
             opti = Optional.of(run.get());
@@ -173,12 +173,12 @@ public class Throwable {
      * @return
      */
     public static <T> Optional<T> returnOptionalOrThrow(ThrowableReturn<T> run){
-        Optional<T> opti = null;
+        Optional<T> opti = Optional.empty();
 
         try{
             opti = Optional.of(run.get());
-        } catch (Exception ignored){
-            ignored.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
 
         return opti;
