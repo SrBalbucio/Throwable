@@ -24,11 +24,15 @@ public class Throwable {
      * @param run
      * @param onError
      */
-    public static void silentlyAnd(ThrowableRunnable run, Runnable onError){
+    public static void silentlyAnd(ThrowableRunnable run, ThrowableRunnable onError){
         try{
             run.run();
         } catch (Exception ignored){
-            onError.run();
+            try {
+                onError.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -105,12 +109,16 @@ public class Throwable {
      * @param run
      * @param onError
      */
-    public static void throwAnd(ThrowableRunnable run, Runnable onError){
+    public static void throwAnd(ThrowableRunnable run, ThrowableRunnable onError){
         try{
             run.run();
         }catch (Exception e){
             e.printStackTrace();
-            onError.run();
+            try {
+                onError.run();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -154,13 +162,17 @@ public class Throwable {
      * @param onError
      * @return
      */
-    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run, Runnable onError){
+    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run, ThrowableRunnable onError){
         Optional<T> opti = Optional.empty();
 
         try{
             opti = Optional.of(run.get());
         } catch (Exception ignored){
-            onError.run();
+            try {
+                onError.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return opti;
