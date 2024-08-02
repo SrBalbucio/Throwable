@@ -1,6 +1,4 @@
-package balbucio.throwable.runnables;
-
-import java.util.Optional;
+package balbucio.throwable.model;
 
 public interface ThrowableReturn<T> {
 

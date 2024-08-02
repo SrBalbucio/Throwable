@@ -1,7 +1,7 @@
 package balbucio.throwable;
 
-import balbucio.throwable.runnables.ThrowableReturn;
-import balbucio.throwable.runnables.ThrowableRunnable;
+import balbucio.throwable.model.ThrowableReturn;
+import balbucio.throwable.model.ThrowableRunnable;
 import java.io.FileWriter;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -145,7 +145,7 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run){
+    public static <T> Optional<T> silentlyOptional(ThrowableReturn<T> run){
         Optional<T> opti = Optional.empty();
 
         try{
@@ -162,7 +162,7 @@ public class Throwable {
      * @param onError
      * @return
      */
-    public static <T> Optional<T> returnOptionalOrSilently(ThrowableReturn<T> run, ThrowableRunnable onError){
+    public static <T> Optional<T> silentlyOptional(ThrowableReturn<T> run, ThrowableRunnable onError){
         Optional<T> opti = Optional.empty();
 
         try{
@@ -184,7 +184,7 @@ public class Throwable {
      * @param run
      * @return
      */
-    public static <T> Optional<T> returnOptionalOrThrow(ThrowableReturn<T> run){
+    public static <T> Optional<T> throwOptional(ThrowableReturn<T> run){
         Optional<T> opti = Optional.empty();
 
         try{

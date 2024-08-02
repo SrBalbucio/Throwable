@@ -1,4 +1,4 @@
-package balbucio.throwable.runnables;
+package balbucio.throwable.model;
 
 public interface ThrowableRunnable {
 
