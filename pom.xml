@@ -6,7 +6,7 @@
 
     <groupId>balbucio.throwable</groupId>
     <artifactId>throwable</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>Throwable</name>
     <description>A library with methods for error handling in a simplified way.</description>
 
